@@ -49,7 +49,6 @@ def get_colors(hsv_image):
 
     unique_vals = np.unique(hsv_image[:, :, 0])
     epsilon = np.diff(unique_vals).mean()
-
     for i in range(1, unique_vals.shape[0]):
         d = abs(unique_vals[i] - unique_vals[i - 1])
         if abs(dist - d) > epsilon:
@@ -63,7 +62,6 @@ def get_colors(hsv_image):
 def get_border_colors(colors):
     border_colors = []
     for i in range(len(colors)):
-        # last red color
         if i == len(colors) - 1:
             border_colors.append((colors[i] + 360.0) / 2)
         else:
@@ -72,28 +70,13 @@ def get_border_colors(colors):
 
 
 if __name__ == "__main__":
-
-    # read an image from a file into an array
     image = plt.imread('balls_and_rects.png')
-
-    # RGB to HSV color space conversion
     hsv_image = color.rgb2hsv(image)
-
-    # Sum of array elements over a given axis
     binary = np.sum(image, 2)
-
     binary[binary > 0] = 1
-
-    # Label connected regions of an integer array
     labeled = label(binary)
-
-    # Measure properties of labeled image regions
     regions = regionprops(labeled)
-
-    # get colors and delete first, cuz 0.0 it's background
     colors = get_colors(hsv_image)[1:]
-
-    # get border colors
     border_colors = get_border_colors(colors)
 
     rects = {}
