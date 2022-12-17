@@ -56,5 +56,5 @@ if __name__ == "__main__":
             if (((attitude(reg) > 105) and (300000 < reg.area < 450000))):
                 pencil += 1
         pencils = pencils + pencil
-        print(f"Amount of pencils on image number {i}: {pencil}\n")
-    print(f"Amount of pencils in all images: {pencils}")
+        print(f" in img {i}: {pencil} pencils\n")
+    print(f"in all images: {pencils}")
